@@ -2,7 +2,7 @@ const { Book, Genre } = require("../models/sequelize");
 const createError = require("http-errors");
 
 // Display list of all Genre.
-exports.genre_list = function (req, res) {
+exports.genre_list = async function (req, res, next) {
   try {
     const genres = await Genre.findAll({
       order: [["name", "ASC"]],
