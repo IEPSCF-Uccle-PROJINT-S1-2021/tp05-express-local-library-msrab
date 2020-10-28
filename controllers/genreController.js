@@ -3,7 +3,14 @@ const createError = require("http-errors");
 
 // Display list of all Genre.
 exports.genre_list = function (req, res) {
-  res.send("NOT IMPLEMENTED: Genre list");
+  try {
+    const genres = await Genre.findAll({
+      order: [["name", "ASC"]],
+    });
+    res.render("genre_list", { title: "Genres List", genres });
+  } catch (error) {
+    next(error);
+  }
 };
 
 // Display detail page for a specific Genre.
